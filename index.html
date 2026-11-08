@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phiếu Nhận Tin Báo Cháy, CNCH - PC07</title>
+    <style>
+        :root {
+            --primary-red: #e53935;
+            --primary-yellow: #ffeb3b;
+            --primary-blue: #1e88e5;
+            --primary-green: #43a047;
+            --text-dark: #1e293b;
+            --border-color: #cbd5e1;
+            --bg-gradient: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-image: var(--bg-gradient);
+            color: var(--text-dark);
+            margin: 0;
+            padding: 20px 10px;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            line-height: 1.5;
+        }
+
+        .container {
+            background-color: #ffffff;
+            width: 100%;
+            max-width: 650px;
+            padding: 0 0 30px 0;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            overflow: hidden;
+        }
+
+        .header-banner {
+            background: linear-gradient(135deg, #d32f2f, #f44336);
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(211, 47, 47, 0.3);
+            margin-bottom: 25px;
+        }
+
+        .header-text {
+            text-align: center;
+            width: 100%;
+        }
+        
+        .header-text h3 {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--primary-yellow);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .header-text h4 {
+            margin: 5px 0 0 0;
+            font-size: 19px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .date-container {
+            text-align: right;
+            padding: 0 30px;
+            font-style: italic;
+            color: #64748b;
+            font-size: 14px;
+            margin-top: -15px;
+            margin-bottom: 20px;
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 25px;
+            padding: 0 20px;
+        }
+
+        .title h1 {
+            color: var(--primary-red);
+            margin: 0;
+            font-size: 24px;
+            text-transform: uppercase;
+            text-shadow: 1px 1px 0px rgba(255,255,255,1), 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .form-body {
+            padding: 0 30px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #334155;
+            font-size: 15px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-family: inherit;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            background-color: #f8fafc;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            background-color: #fff;
+            box-shadow: 0 0 0 4px rgba(30, 136, 229, 0.15);
+        }
+
+        .form-control::placeholder {
+            color: #94a3b8;
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        input[readonly] {
+            background-color: #e2e8f0;
+            color: #1e293b;
+            border-color: #cbd5e1;
+            font-weight: 600;
+        }
+
+        #customTypeContainer {
+            display: none; 
+            margin-top: 12px;
+            padding-left: 15px;
+            border-left: 4px solid var(--primary-red);
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Style cho các nút điền nhanh */
+        .quick-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .quick-tag {
+            background-color: #e2e8f0;
+            color: #334155;
+            padding: 6px 12px;
+            border-radius: 16px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            border: 1px solid #cbd5e1;
+        }
+
+        .quick-tag:hover {
+            background-color: #cbd5e1;
+            color: var(--primary-blue);
+            border-color: var(--primary-blue);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 35px;
+        }
+
+        .btn {
+            padding: 14px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+            flex: 1;
+            transition: all 0.2s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            text-transform: uppercase;
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, #2196F3, #1565C0);
+            color: white;
+            box-shadow: 0 6px 15px rgba(33, 150, 243, 0.3);
+        }
+
+        .btn-print {
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+            color: white;
+            box-shadow: 0 6px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        @media print {
+            body { background: white; padding: 0; }
+            .container { box-shadow: none; margin: 0; padding: 0; max-width: 100%; border-radius: 0; }
+            .header-banner { background: transparent; color: black; box-shadow: none; margin-bottom: 10px; padding: 10px 0; }
+            .header-text h3 { color: black; font-weight: normal; font-size: 14px; }
+            .header-text h4 { color: black; font-size: 16px; margin-top: 0; }
+            .title h1 { color: black; text-shadow: none; }
+            .btn-group, .quick-tags { display: none; } /* Ẩn các nút điền nhanh khi in */
+            .form-body { padding: 0; }
+            .form-control { 
+                border: none; 
+                border-bottom: 1px dotted #000; 
+                border-radius: 0; 
+                padding: 5px 0;
+                background-color: transparent !important;
+                resize: none;
+                color: black !important;
+            }
+            .form-control::placeholder { color: transparent; }
+            select.form-control { appearance: none; }
+            #customTypeContainer { border-left: none; padding-left: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header-banner">
+            <div class="header-text">
+                <h3>Công an TP Hải Phòng</h3>
+                <h4>Phòng Cảnh sát PCCC & CNCH</h4>
+            </div>
+        </div>
+
+        <div class="date-container">
+            <span id="displayDate">Hải Phòng, ngày ... tháng ... năm ...</span>
+        </div>
+
+        <div class="title">
+            <h1>PHIẾU NHẬN TIN BÁO CHÁY, CNCH</h1>
+        </div>
+
+        <div class="form-body">
+            <form id="dispatchForm">
+                <div class="form-group">
+                    <label for="time">Thời gian nhận tin:</label>
+                    <input type="text" id="time" class="form-control" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label for="caller">Họ tên người báo:</label>
+                    <input type="text" id="caller" class="form-control" placeholder="Ví dụ: Nguyễn Văn A..." required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Số điện thoại liên hệ:</label>
+                    <input type="tel" id="phone" class="form-control" placeholder="Nhập số điện thoại..." required>
+                </div>
+
+                <div class="form-group">
+                    <label for="location">Địa chỉ xảy ra sự cố:</label>
+                    <input type="text" id="location" class="form-control" placeholder="Số nhà, đường, phường/xã, quận/huyện..." required>
+                    <!-- Thẻ điền nhanh cho Địa chỉ -->
+                    <div class="quick-tags">
+                        <span class="quick-tag" onclick="appendTag('location', ', Quận Ngô Quyền, Hải Phòng')">Q. Ngô Quyền</span>
+                        <span class="quick-tag" onclick="appendTag('location', ', Quận Hồng Bàng, Hải Phòng')">Q. Hồng Bàng</span>
+                        <span class="quick-tag" onclick="appendTag('location', ', Quận Lê Chân, Hải Phòng')">Q. Lê Chân</span>
+                        <span class="quick-tag" onclick="appendTag('location', ', Quận Hải An, Hải Phòng')">Q. Hải An</span>
+                        <span class="quick-tag" onclick="appendTag('location', ', Quận Kiến An, Hải Phòng')">Q. Kiến An</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="typeSelect">Loại hình sự cố:</label>
+                    <select id="typeSelect" class="form-control" onchange="toggleCustomType()">
+                        <option value="" disabled selected>-- Chọn loại hình sự cố --</option>
+                        <option value="Cháy nhà dân">Cháy nhà dân</option>
+                        <option value="Cháy cơ sở kinh doanh/sản xuất">Cháy cơ sở kinh doanh/sản xuất</option>
+                        <option value="Cháy phương tiện giao thông">Cháy phương tiện giao thông</option>
+                        <option value="Cứu nạn cứu hộ (Mắc kẹt)">Cứu nạn cứu hộ (Mắc kẹt)</option>
+                        <option value="Cứu nạn cứu hộ (Đuối nước)">Cứu nạn cứu hộ (Đuối nước)</option>
+                        <option value="Khác">Khác (Vui lòng ghi rõ)</option>
+                    </select>
+                    
+                    <div id="customTypeContainer">
+                        <input type="text" id="customType" class="form-control" placeholder="Ghi rõ loại sự cố...">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="details">Tình hình ban đầu (Thiệt hại, người mắc kẹt, chất cháy...):</label>
+                    <textarea id="details" class="form-control" placeholder="Mô tả tóm tắt thông tin nhận được qua điện thoại..."></textarea>
+                    <!-- Thẻ điền nhanh cho Tình hình -->
+                    <div class="quick-tags">
+                        <span class="quick-tag" onclick="appendTag('details', 'Có người mắc kẹt. ')">Có người mắc kẹt</span>
+                        <span class="quick-tag" onclick="appendTag('details', 'Đám cháy phát triển mạnh, lan nhanh. ')">Cháy lớn, lan nhanh</span>
+                        <span class="quick-tag" onclick="appendTag('details', 'Có nhiều khói khí độc. ')">Nhiều khói khí độc</span>
+                        <span class="quick-tag" onclick="appendTag('details', 'Chưa rõ thiệt hại ban đầu. ')">Chưa rõ thiệt hại</span>
+                        <span class="quick-tag" onclick="appendTag('details', 'Nguy cơ cháy lan sang nhà dân xung quanh. ')">Nguy cơ cháy lan</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="officer">Cán bộ trực ban nhận tin:</label>
+                    <input type="text" id="officer" class="form-control" placeholder="Cấp bậc - Họ tên đồng chí trực ban...">
+                    <div class="quick-tags">
+                        <span class="quick-tag" onclick="setOfficer('Đ/c Phú')">Đ/c Phú</span>
+                        <span class="quick-tag" onclick="setOfficer('Đ/c Đức')">Đ/c Đức</span>
+                        <span class="quick-tag" onclick="setOfficer('Đ/c Sơn')">Đ/c Sơn</span>
+                        <span class="quick-tag" onclick="setOfficer('Đ/c Thắng')">Đ/c Thắng</span>
+                        <span class="quick-tag" onclick="setOfficer('Đ/c Đức Anh')">Đ/c Đức Anh</span>
+                        <span class="quick-tag" onclick="setOfficer('Đ/c Phong')">Đ/c Phong</span>
+                        <span class="quick-tag" onclick="setOfficer('Đ/c Hợp')">Đ/c Hợp</span>
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <button type="button" class="btn btn-submit" onclick="saveData()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                        Lưu Dữ Liệu
+                    </button>
+                    <button type="button" class="btn btn-print" onclick="window.print()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                        In / Xuất PDF
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const year = now.getFullYear();
+
+            document.getElementById('displayDate').textContent = `Hải Phòng, ngày ${day} tháng ${month} năm ${year}`;
+            document.getElementById('time').value = `${hours}:${minutes} - Ngày ${day}/${month}/${year}`;
+        });
+
+        function toggleCustomType() {
+            const select = document.getElementById('typeSelect');
+            const customContainer = document.getElementById('customTypeContainer');
+            const customInput = document.getElementById('customType');
+
+            if (select.value === 'Khác') {
+                customContainer.style.display = 'block';
+                customInput.focus(); 
+            } else {
+                customContainer.style.display = 'none';
+                customInput.value = ''; 
+            }
+        }
+
+        // Hàm nối thêm chữ vào ô nhập (cho Địa chỉ và Tình hình)
+        function appendTag(elementId, text) {
+            const inputEl = document.getElementById(elementId);
+            inputEl.value += text;
+            inputEl.focus(); // Tự động trỏ chuột vào ô sau khi chèn để gõ tiếp nếu cần
+        }
+
+        // Hàm thay thế chữ trong ô (cho Tên cán bộ trực ban)
+        function setOfficer(text) {
+            const inputEl = document.getElementById('officer');
+            inputEl.value = text;
+        }
+
+        function saveData() {
+            alert('Đã ghi nhận dữ liệu thành công!');
+        }
+    </script>
+</body>
+</html>
